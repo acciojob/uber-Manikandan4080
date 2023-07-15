@@ -3,6 +3,7 @@ package com.driver.controllers;
 import com.driver.model.Admin;
 import com.driver.model.Customer;
 import com.driver.model.Driver;
+import com.driver.repository.AdminRepository;
 import com.driver.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
+
+
 	@Autowired
 	AdminService adminService;
 
@@ -36,11 +39,13 @@ public class AdminController {
 
 	@GetMapping("/listOfCustomers")
 	public List<Customer> listOfCustomers() {
-		return adminService.getListOfCustomers();
+		List<Customer> listOfCustomers = adminService.getListOfCustomers();
+		return listOfCustomers;
 	}
 
 	@GetMapping("/listOfDrivers")
 	public List<Driver> listOfDrivers() {
-		return adminService.getListOfDrivers();
+		List<Driver> listOfDrivers = adminService.getListOfDrivers();
+		return listOfDrivers;
 	}
 }

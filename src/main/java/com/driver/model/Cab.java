@@ -1,40 +1,54 @@
 package com.driver.model;
 
-import javax.persistence.*;
 
-@Entity
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 @Table
+@Entity
 public class Cab{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int Id;
     private int perKmRate;
-    private boolean available;
+    private boolean Available;
     @OneToOne
     @JoinColumn
     private Driver driver;
 
-
-    public Cab() {
-    }
-    public Cab(int perKmRate, boolean available) {
-        this.perKmRate = perKmRate;
-        this.available = available;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public Cab(int id, int perKmRate, boolean available, Driver driver) {
-        this.id = id;
-        this.perKmRate = perKmRate;
-        this.available = available;
+    public void setDriver(Driver driver) {
         this.driver = driver;
     }
 
+    public Cab() {
+    }
+
+    public Cab(int perKmRate, boolean available) {
+        this.perKmRate = perKmRate;
+        this.Available = available;
+    }
+
+    public Cab(int id, int perKmRate, boolean available, Driver driver) {
+        Id = id;
+        this.perKmRate = perKmRate;
+        Available = available;
+        this.driver = driver;
+    }
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
     public int getPerKmRate() {
@@ -45,19 +59,11 @@ public class Cab{
         this.perKmRate = perKmRate;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public boolean getAvailable() {
+        return Available;
     }
 
     public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    public Driver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+        this.Available = available;
     }
 }

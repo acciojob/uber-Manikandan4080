@@ -25,11 +25,14 @@ public class DriverServiceImpl implements DriverService {
 	@Override
 	public void register(String mobile, String password){
 		//Save a driver in the database having given details and a cab with ratePerKm as 10 and availability as True by default.
-		Driver driver = new Driver(mobile,password);
+		Driver driver = new Driver();
+		driver.setMobile(mobile);
+		driver.setPassword(password);
+		Cab cab = new Cab();
+		cab.setPerKmRate(10);
 
-		Cab cab = new Cab(10, true);
+		cab.setAvailable(true);
 		driver.setCab(cab);
-
 		driverRepository3.save(driver);
 	}
 
@@ -42,11 +45,14 @@ public class DriverServiceImpl implements DriverService {
 
 		List<TripBooking> tripBookingList = driver.getTripBookingList();
 		for(TripBooking tripBooking : tripBookingList){
-			if(tripBooking.getTripStatus() == TripStatus.CONFIRMED)
-				tripBooking.setTripStatus(TripStatus.CANCELED);
+			if(tripBooking.getStatus() == TripStatus.CONFIRMED){
+				tripBooking.setStatus(TripStatus.CANCELED);
+			}
 		}
 
 		driverRepository3.delete(driver);
+
+
 	}
 
 	@Override
@@ -54,6 +60,7 @@ public class DriverServiceImpl implements DriverService {
 		//Set the status of respective car to unavailable
 		Driver driver = driverRepository3.findById(driverId).get();
 		driver.getCab().setAvailable(false);
+
 		driverRepository3.save(driver);
 	}
 }
