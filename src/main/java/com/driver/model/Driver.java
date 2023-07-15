@@ -15,7 +15,7 @@ public class Driver{
 
     @OneToOne(mappedBy = "driver", cascade = CascadeType.ALL)
     private Cab cab;
-    @OneToOne(mappedBy = "driver", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
     private List<TripBooking> tripBookingList = new ArrayList<>();
     public Driver() {
     }
